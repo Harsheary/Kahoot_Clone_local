@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './components/Login.jsx'
+import Login from './Components/Login.jsx'
 import Registration from './components/Registration.jsx'
 import Quizzes from './components/Quizzes.jsx'
 import CreateQuiz from './components/CreateQuiz.jsx'
