@@ -1,11 +1,33 @@
-const express = require('express');
-const { MongoClient, ObjectId } = require('mongodb');
-const cors = require('cors');
-require('dotenv').config();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { Server } = require('socket.io');
-const http = require('http')
+// const express = require('express');
+// const { MongoClient, ObjectId } = require('mongodb');
+// const cors = require('cors');
+// require('dotenv').config();
+// const bcrypt = require("bcryptjs");
+// const jwt = require("jsonwebtoken");
+// const { Server } = require('socket.io');
+// const http = require('http')
+
+import express from 'express'; 
+import { MongoClient, ObjectId } from 'mongodb';
+import cors from 'cors'; 
+import dotenv from 'dotenv';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken'; 
+import { Server} from 'socket.io'; 
+import http from 'http'; 
+
+// Initialize dotenv for environment variables
+dotenv.config();
+
+
+
+//deployement
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
+console.log("name: ", __dirname); 
+
 
 /*<<<<<<< HEAD
 const path = require("path");
@@ -18,6 +40,8 @@ const app = express();
 const port = process.env.PORT || 5000; 
 const SECRET_KEY = "comp229secretkey";
 
+
+
 app.use(express.json());
 app.use(cors());
 app.use(cors({
@@ -25,6 +49,14 @@ app.use(cors({
   methods: ['GET', 'POST'],
   credentials: true,
 }));
+
+
+//for deployment purpose
+app.use(express.static(path.join(__dirname, "/client/dist")))
+
+//rendering for any path user goes to
+app.get("*", (req, res)=>res.sendFile(path.join(__dirname, "/client/dist/index.html")))
+
 
 
 const mongoUri = process.env.MONGO_URI; 
